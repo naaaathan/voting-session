@@ -1,6 +1,6 @@
 # Associate Voting Session
 
-<img src="https://vote.gov/assets/img/ballot-box-OG.png" alt="exemplo imagem">
+<img width="400" height="200" src="https://vote.gov/assets/img/ballot-box-OG.png" alt="exemplo imagem">
 
 > Projeto criado para uma avaliação técnica de desenvolvimento back-end, esse projeto visa criar uma solução para promover votos de associados
 > do cooperativismo em assembleias.
@@ -19,6 +19,7 @@
 Para buildar e deployar o projeto localmente, execute o seguinte comando docker:
 
 ```
+docker-compose run build
 docker-compose up deploy
 ```
 

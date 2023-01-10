@@ -28,7 +28,7 @@ services:
       - default
 
   deploy:
-    image: openjdk:17-alpine
+    image: openjdk:17-oracle
     working_dir: /app
     user: 1000:1000
     volumes:
