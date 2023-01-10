@@ -17,7 +17,7 @@ public class VotingAgenda extends AbstractPersistable<Long> {
     private Long votingTime;
 
     @Column
-    private Date votingDate;
+    private Date beginVotingDate;
 
     @Column
     private Date createdAt;
@@ -38,12 +38,12 @@ public class VotingAgenda extends AbstractPersistable<Long> {
         this.votingTime = votingTime;
     }
 
-    public Date getVotingDate() {
-        return votingDate;
+    public Date getBeginVotingDate() {
+        return beginVotingDate;
     }
 
-    public void setVotingDate(Date votingDate) {
-        this.votingDate = votingDate;
+    public void setBeginVotingDate(Date beginVotingDate) {
+        this.beginVotingDate = beginVotingDate;
     }
 
     public Date getCreatedAt() {

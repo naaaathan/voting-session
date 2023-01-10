@@ -22,7 +22,7 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 
     public ResponseEntity<RestApiErrorMessage> handleBadRequestExceptions(Exception exception, WebRequest request) {
 
-        RestApiErrorMessage restApiErrorMessage = new RestApiErrorMessage(exception.getMessage(), HttpStatus.NOT_FOUND);
+        RestApiErrorMessage restApiErrorMessage = new RestApiErrorMessage(exception.getMessage(), HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(restApiErrorMessage, new HttpHeaders(), restApiErrorMessage.getHttpStatus());
 

@@ -1,7 +1,6 @@
 package com.voting.session.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
@@ -21,7 +20,7 @@ public class VotingSession {
     private VotingAgenda votingAgenda;
 
     @Column
-    private int ttlVotingSession;
+    private Long ttlVotingSession;
 
     @Column
     private Date createdAt;
@@ -35,11 +34,11 @@ public class VotingSession {
         this.votingAgenda = votingAgenda;
     }
 
-    public int getTtlVotingSession() {
+    public Long getTtlVotingSession() {
         return ttlVotingSession;
     }
 
-    public void setTtlVotingSession(int ttlVotingSession) {
+    public void setTtlVotingSession(Long ttlVotingSession) {
         this.ttlVotingSession = ttlVotingSession;
     }
 

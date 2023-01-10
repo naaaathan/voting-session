@@ -10,7 +10,7 @@ public class VoteAgendaView {
     private Long votingTime;
 
 
-    private String votingDate;
+    private String beginVotingDate;
 
     public String getVotingTitle() {
         return votingTitle;
@@ -28,11 +28,11 @@ public class VoteAgendaView {
         this.votingTime = votingTime;
     }
 
-    public String getVotingDate() {
-        return votingDate;
+    public String getBeginVotingDate() {
+        return beginVotingDate;
     }
 
-    public void setVotingDate(String votingDate) {
-        this.votingDate = votingDate;
+    public void setBeginVotingDate(String beginVotingDate) {
+        this.beginVotingDate = beginVotingDate;
     }
 }

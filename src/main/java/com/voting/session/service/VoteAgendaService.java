@@ -10,7 +10,7 @@ public interface VoteAgendaService {
 
     public VotingAgenda save(VoteAgendaView voteAgendaView) throws DateFormatException;
 
-    Optional<VotingAgenda> findById(Long id);
+    VotingAgenda findById(Long id);
 
     VotingAgenda findVotingAgendaTitleByVotingSessionId(Long sessionId);
 }

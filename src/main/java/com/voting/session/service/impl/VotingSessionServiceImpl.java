@@ -1,5 +1,6 @@
 package com.voting.session.service.impl;
 
+import com.voting.session.exception.VotingAgendaDidNotStarted;
 import com.voting.session.exception.VotingAgendaNotFoundException;
 import com.voting.session.exception.VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime;
 import com.voting.session.exception.VotingSessionNotFoundException;
@@ -29,8 +30,8 @@ public class VotingSessionServiceImpl implements VotingSessionService {
     }
 
     @Override
-    public VotingSession createNewVotingSession(Integer ttlVotingSession, Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
-        return votingSessionRepository.save(createVotingSessionModel(ttlVotingSession, votingAgendaId));
+    public VotingSession createNewVotingSession(Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
+        return votingSessionRepository.save(createVotingSessionModel(votingAgendaId));
     }
 
     @Override
@@ -46,31 +47,36 @@ public class VotingSessionServiceImpl implements VotingSessionService {
 
     }
 
-    private VotingSession createVotingSessionModel(Integer ttlVotingSession, Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
+    private VotingSession createVotingSessionModel(Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
 
         VotingSession votingSession = new VotingSession();
 
         votingSession.setCreatedAt(new Date());
-        votingSession.setTtlVotingSession(ttlVotingSession != null ? ttlVotingSession : 1);
 
-        Optional<VotingAgenda> votingAgenda = voteAgendaService.findById(votingAgendaId);
+        VotingAgenda votingAgenda = voteAgendaService.findById(votingAgendaId);
 
         validateVotingSessionAndVotingAgenda(votingAgenda);
 
-        votingSession.setVotingAgenda(votingAgenda.get());
+        votingSession.setTtlVotingSession(votingAgenda.getVotingTime() != null ? votingAgenda.getVotingTime() : 1);
+
+        votingSession.setVotingAgenda(votingAgenda);
 
         return votingSession;
 
     }
 
-    private void validateVotingSessionAndVotingAgenda(Optional<VotingAgenda> votingAgenda) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
-        if (votingAgenda.isEmpty()) {
-            throw new VotingAgendaNotFoundException("Does not exist any voting agenda for the given id");
+    private void validateVotingSessionAndVotingAgenda(VotingAgenda votingAgenda) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime {
+
+        Date nowDate = new Date();
+        Date beginVoteDate = votingAgenda.getBeginVotingDate();
+
+        if (nowDate.before(beginVoteDate)) {
+            throw new VotingAgendaDidNotStarted(String.format("Cannot start voting session before voting agenda begin date of %s", beginVoteDate));
         }
 
-        VotingSession votingSession = votingSessionRepository.findVotingSessionByVotingAgendaIdAndVotingAgendaDate(new Date());
+        VotingSession votingSession = votingSessionRepository.findVotingSessionByVotingAgendaIdAndVotingAgendaDate(nowDate);
 
-        if(votingSession != null){
+        if (votingSession != null) {
             throw new VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime("There is already a session running for this agenda, can't start a new session for the same agenda at same time");
         }
     }

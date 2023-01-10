@@ -50,4 +50,9 @@ public class RestExceptionHandler extends ExceptionsHandler {
         return super.handleExceptionNotFound(exception, request);
     }
 
+    @ExceptionHandler(VotingAgendaDidNotStarted.class)
+    public ResponseEntity<RestApiErrorMessage> handleVotingAgendaDidNotStartedException(VotingAgendaDidNotStarted exception, WebRequest request) {
+        return super.handleBadRequestExceptions(exception, request);
+    }
+
 }

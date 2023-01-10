@@ -116,7 +116,7 @@ public class VoteServiceImpl implements VoteService {
         Calendar calendar = Calendar.getInstance();
 
         calendar.setTime(votingSession.getCreatedAt());
-        calendar.add(Calendar.MINUTE, votingSession.getTtlVotingSession());
+        calendar.add(Calendar.MINUTE, Math.toIntExact(votingSession.getTtlVotingSession()));
         Date limitDate = calendar.getTime();
 
         Date actualDate = new Date();

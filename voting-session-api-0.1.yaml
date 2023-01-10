@@ -1,0 +1,402 @@
+---
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "0.1"
+servers:
+  - url: http://localhost:8080
+paths:
+  /associate/createAssociate:
+    post:
+      description: Endpoint utilizado para cadastrar um novo associado no sistema.
+      requestBody:
+        description: Informações do novo associado, sendo nome, documento e data de nascimento
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/associate_createAssociate_body'
+            examples:
+              "0":
+                value: "{\n    \"name\": \"Augusto\",\n    \"primaryDocumentNumber\": \"2081218299120211\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+              "1":
+                value: "{\n    \"name\": \"Ricardo\",\n    \"primaryDocumentNumber\": \"2081218299121210211\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+              "2":
+                value: "{\n    \"name\": \"Ricardo\",\n    \"primaryDocumentNumber\": \"2081218299121210211\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+              "3":
+                value: "{\n    \"name\": \"Jeferson\",\n    \"primaryDocumentNumber\": \"4234234234234234\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+              "4":
+                value: "{\n    \"name\": \"Julia\",\n    \"primaryDocumentNumber\": \"435435354353\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+        required: true
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value: '{"response":{"id":1,"new":false},"httpStatus":"OK","error":null}'
+                "1":
+                  value: '{"response":{"id":2,"new":false},"httpStatus":"OK","error":null}'
+                "2":
+                  value: '{"response":{"id":4,"new":false},"httpStatus":"OK","error":null}'
+                "3":
+                  value: '{"response":{"id":5,"new":false},"httpStatus":"OK","error":null}'
+        "500":
+          description: Auto generated using Swagger Inspector
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /vote/countVotes/{sessionId}:
+    post:
+      description: Endpoint utilizado para contar os votos de uma sessão de votação finalizada.
+      parameters:
+        - name: sessionId
+          in: path
+          description: Numeric id of session to count votes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/countVotes_sessionId_body'
+            examples:
+              "0":
+                value: |-
+                  {
+                      "associateId": 5,
+                      "vote": true
+                  }
+              "1":
+                value: |-
+                  {
+                      "associateId": 5,
+                      "vote": true
+                  }
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+              examples:
+                "0":
+                  value: '{"response":{"votingAgendaId":1,"voteAgendaName":"Assembleia sobre aumento da tarifação sobre as transações utilizadas sobre crédito agropecuário","voteSessionId":1,"votesYes":4,"votesNo":0},"httpStatus":"OK","error":null}'
+        "400":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value: '{"error":"The session is still up to votes, can''t count votes until it finishes.","httpStatus":"BAD_REQUEST"}'
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /vote/{sessionId}:
+    post:
+      description: Endpoint utilizado para votar em uma dada sessão de votação.
+      parameters:
+        - name: sessionId
+          in: path
+          description: Numeric id of session to vote
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vote_sessionId_body'
+            examples:
+              "0":
+                value: |-
+                  {
+                      "associateId": 1,
+                      "vote": true
+                  }
+              "1":
+                value: |-
+                  {
+                      "associateId": 2,
+                      "vote": true
+                  }
+              "2":
+                value: |-
+                  {
+                      "associateId": 3,
+                      "vote": true
+                  }
+              "3":
+                value: |-
+                  {
+                      "associateId": 4,
+                      "vote": true
+                  }
+              "4":
+                value: |-
+                  {
+                      "associateId": 5,
+                      "vote": true
+                  }
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+              examples:
+                "0":
+                  value: '{"response":{"id":1,"associateId":1,"vottingSessionId":1},"httpStatus":"OK","error":null}'
+                "1":
+                  value: '{"response":{"id":2,"associateId":2,"vottingSessionId":1},"httpStatus":"OK","error":null}'
+                "2":
+                  value: '{"response":{"id":3,"associateId":4,"vottingSessionId":1},"httpStatus":"OK","error":null}'
+                "3":
+                  value: '{"response":{"id":4,"associateId":5,"vottingSessionId":1},"httpStatus":"OK","error":null}'
+        "404":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value: '{"error":"Associate not found for the given id.","httpStatus":"NOT_FOUND"}'
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /agenda/saveAgenda:
+    post:
+      description: Endpoint utilizado para cadastrar uma nova pauta de votação.
+      requestBody:
+        description: Informações sobre a nova pauta cadastrada, data de inicio da votação e tempo em minutos da sua duração.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agenda_saveAgenda_body'
+            examples:
+              "0":
+                value: "{\n    \"votingTitle\": \"Assembleia sobre aumento da tarifação sobre as transações utilizadas sobre crédito agropecuário\",\n    \"votingTime\": 5,\n    \"beginVotingDate\": \"10/01/2022\"\n    \n}"
+        required: true
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+              examples:
+                "0":
+                  value: '{"response":{"id":1,"votingTitle":"Assembleia sobre aumento da tarifação sobre as transações utilizadas sobre crédito agropecuário","votingTime":5,"beginVotingDate":"2022-01-10T03:00:00.000+00:00","createdAt":"2023-01-10T20:50:48.115+00:00","new":false},"httpStatus":"OK","error":null}'
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /voteSession/startSession/{sessionId}:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: sessionId
+          in: path
+          description: Numeric id of session to start session
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/startSession_sessionId_body'
+            examples:
+              "0":
+                value: "{\n    \"name\": \"Julia\",\n    \"primaryDocumentNumber\": \"435435354353\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+              "1":
+                value: "{\n    \"name\": \"Julia\",\n    \"primaryDocumentNumber\": \"435435354353\",\n    \"birthDate\": \"26/04/2000\"\n    \n    \n}"
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+              examples:
+                "0":
+                  value: '{"response":{"id":1,"votingAgenda":{"id":1,"votingTitle":"Assembleia sobre aumento da tarifação sobre as transações utilizadas sobre crédito agropecuário","votingTime":5,"beginVotingDate":"2022-01-10T03:00:00.000+00:00","createdAt":"2023-01-10T20:50:48.115+00:00","new":false},"ttlVotingSession":5,"createdAt":"2023-01-10T20:51:21.099+00:00"},"httpStatus":"OK","error":null}'
+        "400":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value: '{"error":"There is already a session running for this agenda, can''t start a new session for the same agenda at same time","httpStatus":"BAD_REQUEST"}'
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+components:
+  schemas:
+    associate_createAssociate_body:
+      type: object
+      properties:
+        name:
+          type: string
+        primaryDocumentNumber:
+          type: string
+        birthDate:
+          type: string
+    inline_response_200:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            new:
+              type: boolean
+            id:
+              type: integer
+        httpStatus:
+          type: string
+        error: {}
+    countVotes_sessionId_body:
+      type: object
+      properties:
+        associateId:
+          type: integer
+        vote:
+          type: boolean
+    inline_response_200_1:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            votesNo:
+              type: integer
+            voteSessionId:
+              type: integer
+            voteAgendaName:
+              type: string
+            votesYes:
+              type: integer
+            votingAgendaId:
+              type: integer
+        httpStatus:
+          type: string
+        error: {}
+    inline_response_400:
+      type: object
+      properties:
+        httpStatus:
+          type: string
+        error:
+          type: string
+    vote_sessionId_body:
+      type: object
+      properties:
+        associateId:
+          type: integer
+        vote:
+          type: boolean
+    inline_response_200_2:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            vottingSessionId:
+              type: integer
+            associateId:
+              type: integer
+            id:
+              type: integer
+        httpStatus:
+          type: string
+        error: {}
+    agenda_saveAgenda_body:
+      type: object
+      properties:
+        votingTitle:
+          type: string
+        votingTime:
+          type: integer
+        beginVotingDate:
+          type: string
+    inline_response_200_3:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            votingTitle:
+              type: string
+            votingTime:
+              type: integer
+            createdAt:
+              type: string
+            new:
+              type: boolean
+            beginVotingDate:
+              type: string
+            id:
+              type: integer
+        httpStatus:
+          type: string
+        error: {}
+    startSession_sessionId_body:
+      type: object
+      properties:
+        name:
+          type: string
+        primaryDocumentNumber:
+          type: string
+        birthDate:
+          type: string
+    inline_response_200_4:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            createdAt:
+              type: string
+            ttlVotingSession:
+              type: integer
+            id:
+              type: integer
+            votingAgenda:
+              type: object
+              properties:
+                votingTitle:
+                  type: string
+                votingTime:
+                  type: integer
+                createdAt:
+                  type: string
+                new:
+                  type: boolean
+                beginVotingDate:
+                  type: string
+                id:
+                  type: integer
+        httpStatus:
+          type: string
+        error: {}

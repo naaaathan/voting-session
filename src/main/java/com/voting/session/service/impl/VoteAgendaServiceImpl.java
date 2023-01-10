@@ -1,6 +1,6 @@
 package com.voting.session.service.impl;
 
-import com.voting.session.exception.DateFormatException;
+import com.voting.session.exception.VotingAgendaNotFoundException;
 import com.voting.session.model.VotingAgenda;
 import com.voting.session.repository.VotingAgendaRepository;
 import com.voting.session.service.VoteAgendaService;
@@ -29,10 +29,15 @@ public class VoteAgendaServiceImpl implements VoteAgendaService {
     }
 
 
-    public Optional<VotingAgenda> findById(Long id) {
+    public VotingAgenda findById(Long id) {
 
-        return votingAgendaRepository.findById(id);
+        Optional<VotingAgenda> votingAgenda = votingAgendaRepository.findById(id);
 
+        if (votingAgenda.isEmpty()) {
+            throw new VotingAgendaNotFoundException(String.format("Does not exist any voting agenda for the id %s", id));
+        }
+
+        return votingAgenda.get();
     }
 
     public VotingAgenda findVotingAgendaTitleByVotingSessionId(Long sessionId) {
@@ -46,7 +51,7 @@ public class VoteAgendaServiceImpl implements VoteAgendaService {
 
         VotingAgenda votingAgenda = new VotingAgenda();
         votingAgenda.setCreatedAt(new Date());
-        votingAgenda.setVotingDate(DateUtils.formatDate(voteAgendaView.getVotingDate()));
+        votingAgenda.setBeginVotingDate(DateUtils.formatDate(voteAgendaView.getBeginVotingDate()));
         votingAgenda.setVotingTime(voteAgendaView.getVotingTime());
         votingAgenda.setVotingTitle(voteAgendaView.getVotingTitle());
 

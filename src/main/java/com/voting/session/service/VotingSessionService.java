@@ -7,7 +7,7 @@ import com.voting.session.model.VotingSession;
 
 public interface VotingSessionService  {
 
-    VotingSession createNewVotingSession(Integer ttlVotingSession,Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime;
+    VotingSession createNewVotingSession(Long votingAgendaId) throws VotingAgendaNotFoundException, VotingSessionAlreadyExistsForTheGivenAgendaAtThisTime;
 
     VotingSession findById(Long sessionId) throws VotingSessionNotFoundException;
 

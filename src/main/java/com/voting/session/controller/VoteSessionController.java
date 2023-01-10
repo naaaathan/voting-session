@@ -20,9 +20,9 @@ public class VoteSessionController {
     }
 
     @PostMapping("/startSession/{voteAgendaId}")
-    public ResponseEntity<RestResponseView> initializeSessionVote(@RequestHeader Integer ttlVoteSession, @PathVariable("voteAgendaId") int voteAgendaId) {
+    public ResponseEntity<RestResponseView> initializeSessionVote(@PathVariable("voteAgendaId") int voteAgendaId) {
 
-        return ResponseEntity.ok().body(ResponseUtils.createRestResponseView(voteSessionService.createNewVotingSession(ttlVoteSession, (long) voteAgendaId), HttpStatus.OK));
+        return ResponseEntity.ok().body(ResponseUtils.createRestResponseView(voteSessionService.createNewVotingSession((long) voteAgendaId), HttpStatus.OK));
 
     }
 
