@@ -4,6 +4,8 @@ import com.voting.session.service.AssociateService;
 import com.voting.session.utils.ResponseUtils;
 import com.voting.session.view.AssociateView;
 import com.voting.session.view.RestResponseView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/associate")
 public class AssociateController {
 
+    private static final Logger LOGGER = LogManager.getLogger(AssociateController.class);
+
     private final AssociateService associateService;
 
     @Autowired
@@ -26,8 +30,8 @@ public class AssociateController {
     @PostMapping("/createAssociate")
     public ResponseEntity<RestResponseView> createAssociate(@RequestBody AssociateView associateView) {
 
+        LOGGER.info(String.format("Begin create associate request received with body %s", associateView));
         return ResponseEntity.ok().body(ResponseUtils.createRestResponseView(associateService.saveAssociate(associateView), HttpStatus.OK));
-
 
     }
 

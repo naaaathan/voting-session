@@ -1,11 +1,16 @@
 package com.voting.session.view;
 
+import jakarta.validation.constraints.NotNull;
+
 public class AssociateView {
 
+    @NotNull(message = "name field is mandatory")
     private String name;
 
+    @NotNull(message = "primaryDocumentNumber field is mandatory")
     private String primaryDocumentNumber;
 
+    @NotNull(message = "birthDate field is mandatory")
     private String birthDate;
 
     public String getName() {
@@ -30,5 +35,14 @@ public class AssociateView {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "AssociateView{" +
+                "name='" + name + '\'' +
+                ", primaryDocumentNumber='" + primaryDocumentNumber + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                '}';
     }
 }

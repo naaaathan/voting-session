@@ -1,9 +1,13 @@
 package com.voting.session.view;
 
+import jakarta.validation.constraints.NotNull;
+
 public class VoteView {
 
+    @NotNull(message = "associateId field is mandatory")
     private Long associateId;
 
+    @NotNull(message = "vote field is mandatory")
     private Boolean vote;
 
     public Long getAssociateId() {

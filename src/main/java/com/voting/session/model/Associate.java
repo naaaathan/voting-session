@@ -1,15 +1,19 @@
 package com.voting.session.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "associate")
 public class Associate extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue
+    @Nullable
+    private Long id;
 
     @Column
     private String associateName;
@@ -33,7 +37,14 @@ public class Associate extends AbstractPersistable<Long> {
         this.associateBirth = associateBirth;
     }
 
+    @Override
+    @Nullable
+    public Long getId() {
+        return id;
+    }
 
-
-
+    @Override
+    public void setId(@Nullable Long id) {
+        this.id = id;
+    }
 }

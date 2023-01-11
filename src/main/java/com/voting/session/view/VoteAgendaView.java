@@ -1,15 +1,17 @@
 package com.voting.session.view;
 
 
+import jakarta.validation.constraints.NotNull;
+
 public class VoteAgendaView {
 
-
+    @NotNull(message = "votingTitle field is mandatory")
     private String votingTitle;
 
-
+    @NotNull(message = "votingTime field is mandatory")
     private Long votingTime;
 
-
+    @NotNull(message = "beginVotingDate field is mandatory")
     private String beginVotingDate;
 
     public String getVotingTitle() {
@@ -34,5 +36,14 @@ public class VoteAgendaView {
 
     public void setBeginVotingDate(String beginVotingDate) {
         this.beginVotingDate = beginVotingDate;
+    }
+
+    @Override
+    public String toString() {
+        return "VoteAgendaView{" +
+                "votingTitle='" + votingTitle + '\'' +
+                ", votingTime=" + votingTime +
+                ", beginVotingDate='" + beginVotingDate + '\'' +
+                '}';
     }
 }

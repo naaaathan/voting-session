@@ -37,6 +37,8 @@ services:
     depends_on:
       - build
       - mysql
+    ports:
+      - "8080:8080"
     networks:
       - default
 networks:

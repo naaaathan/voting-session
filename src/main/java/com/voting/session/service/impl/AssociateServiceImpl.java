@@ -23,7 +23,7 @@ public class AssociateServiceImpl implements AssociateService {
     }
 
     @Override
-    public Associate saveAssociate(AssociateView associateView){
+    public Associate saveAssociate(AssociateView associateView) {
 
         return associateRepository.save(createAssociteModel(associateView));
     }
@@ -32,14 +32,14 @@ public class AssociateServiceImpl implements AssociateService {
     public Associate findById(Long id) throws AssociateNotFoundException {
         Optional<Associate> associate = associateRepository.findById(id);
 
-        if(associate.isPresent()){
+        if (associate.isPresent()) {
             return associate.get();
         }
 
         throw new AssociateNotFoundException("Associate not found for the given id.");
     }
 
-    private Associate createAssociteModel(AssociateView associateView){
+    private Associate createAssociteModel(AssociateView associateView) {
 
         Associate associate = new Associate();
 

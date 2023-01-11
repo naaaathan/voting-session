@@ -6,6 +6,8 @@ import com.voting.session.repository.VotingAgendaRepository;
 import com.voting.session.service.VoteAgendaService;
 import com.voting.session.utils.DateUtils;
 import com.voting.session.view.VoteAgendaView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 
 @Service
 public class VoteAgendaServiceImpl implements VoteAgendaService {
+
+    private static final Logger LOGGER = LogManager.getLogger(VoteAgendaServiceImpl.class);
 
     private final VotingAgendaRepository votingAgendaRepository;
 
@@ -34,6 +38,7 @@ public class VoteAgendaServiceImpl implements VoteAgendaService {
         Optional<VotingAgenda> votingAgenda = votingAgendaRepository.findById(id);
 
         if (votingAgenda.isEmpty()) {
+            LOGGER.error(String.format("Does not exist any voting agenda for the id %s", id));
             throw new VotingAgendaNotFoundException(String.format("Does not exist any voting agenda for the id %s", id));
         }
 
