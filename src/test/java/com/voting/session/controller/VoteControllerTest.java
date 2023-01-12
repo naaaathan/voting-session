@@ -2,7 +2,6 @@ package com.voting.session.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.voting.session.controller.VoteController;
 import com.voting.session.exception.VotingSessionNotFoundException;
 import com.voting.session.service.VoteService;
 import com.voting.session.view.VoteCountResponseView;

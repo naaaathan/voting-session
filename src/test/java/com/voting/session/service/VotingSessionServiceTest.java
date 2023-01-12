@@ -7,11 +7,9 @@ import com.voting.session.model.VotingAgenda;
 import com.voting.session.model.VotingSession;
 import com.voting.session.repository.VotingSessionRepository;
 import com.voting.session.service.impl.VotingSessionServiceImpl;
-import com.voting.session.utils.DateUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 
 import java.util.Calendar;
 import java.util.Date;

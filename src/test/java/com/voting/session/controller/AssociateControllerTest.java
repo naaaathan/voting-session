@@ -2,7 +2,6 @@ package com.voting.session.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.voting.session.controller.AssociateController;
 import com.voting.session.model.Associate;
 import com.voting.session.service.AssociateService;
 import com.voting.session.view.AssociateView;

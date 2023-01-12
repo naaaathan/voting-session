@@ -1,7 +1,6 @@
 package com.voting.session.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.lang.Nullable;
 
 @Entity
