@@ -8,6 +8,10 @@ public class VoteResponseView {
 
     private Long vottingSessionId;
 
+
+    public VoteResponseView() {
+    }
+
     public VoteResponseView(Long id, Long associateId, Long vottingSessionId) {
         this.id = id;
         this.associateId = associateId;

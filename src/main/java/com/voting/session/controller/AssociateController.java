@@ -22,7 +22,6 @@ public class AssociateController {
 
     private final AssociateService associateService;
 
-    @Autowired
     public AssociateController(AssociateService associateService) {
         this.associateService = associateService;
     }

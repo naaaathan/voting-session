@@ -46,8 +46,12 @@ public class VoteServiceTest {
     @Test
     public void internilizeVote_whenVotingSessionIsNotSessionTime_shouldThrowVoteSessionAlreadyExpiredException() {
 
-        when(votingSessionService.findById(anyLong())).thenReturn(createVoteSessionWithGivenTTL(0L));
-        when(associateService.findById(anyLong())).thenReturn(new Associate());
+        VotingSession voteSession = createVoteSessionWithGivenTTL(0L);
+        Associate associate = createAssociate(10L);
+
+        when(votingSessionService.findById(anyLong())).thenReturn(voteSession);
+        when(associateService.findById(anyLong())).thenReturn(associate);
+        when(voteRepository.save(any())).thenReturn(createVote(associate, voteSession));
 
         Assertions.assertThrows(VoteSessionAlreadyExpired.class, () ->
                 voteService.internilizeVote(10L, createVoteView()), "VoteSessionExpiredException should be thrown");
